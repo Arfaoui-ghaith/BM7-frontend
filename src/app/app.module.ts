@@ -13,6 +13,11 @@ import { CreateTransactionComponent } from './create-transaction/create-transact
 import { CreateCategoryComponent } from './create-category/create-category.component';
 
 
+import { ToastrModule } from 'ngx-toastr';
+import {FormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -28,7 +33,10 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

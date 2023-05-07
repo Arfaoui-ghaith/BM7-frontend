@@ -8,31 +8,38 @@ import { CategoriesListComponent } from "./categories-list/categories-list.compo
 import { CreateCategoryComponent } from "./create-category/create-category.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
+import {AuthGuard} from "./authService/auth.guard";
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'transactions',
-    component: TransactionListComponent
+    component: TransactionListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'transactions/create',
-    component: CreateTransactionComponent
+    component: CreateTransactionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'categories',
-    component: CategoriesListComponent
+    component: CategoriesListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'categories/create',
-    component: CreateCategoryComponent
+    component: CreateCategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
