@@ -14,8 +14,27 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 
 
 import { ToastrModule } from 'ngx-toastr';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgOptimizedImage} from "@angular/common";
+import {TagModule} from "primeng/tag";
+import {ProgressBarModule} from "primeng/progressbar";
+import {TableModule} from "primeng/table";
+import {ButtonModule} from "primeng/button";
+import {InputTextModule} from "primeng/inputtext";
+import {MultiSelectModule} from "primeng/multiselect";
+import {DropdownModule} from "primeng/dropdown";
+import {SliderModule} from "primeng/slider";
+import {ToastModule} from "primeng/toast";
+import {RippleModule} from "primeng/ripple";
+import {DialogModule} from "primeng/dialog";
+import { EditTransactionComponent } from './transaction-list/edit-transaction/edit-transaction.component';
+import {InputMaskModule} from "primeng/inputmask";
+import {InputNumberModule} from "primeng/inputnumber";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {CalendarModule} from "primeng/calendar";
+import { EditCategoryComponent } from './categories-list/edit-category/edit-category.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -29,14 +48,34 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TransactionListComponent,
     CategoriesListComponent,
     CreateTransactionComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    EditTransactionComponent,
+    EditCategoryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgOptimizedImage,
+    ReactiveFormsModule,
+    TagModule,
+    ProgressBarModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    MultiSelectModule,
+    DropdownModule,
+    SliderModule,
+    ToastModule,
+    RippleModule,
+    DialogModule,
+    InputMaskModule,
+    InputNumberModule,
+    SelectButtonModule,
+    CalendarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

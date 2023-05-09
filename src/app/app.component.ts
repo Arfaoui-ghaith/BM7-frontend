@@ -7,19 +7,28 @@ import {Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(private auth: AuthService, private router: Router) {
   }
+
+  toggle: boolean = false;
+
+  toggleChange(){
+    this.toggle = !this.toggle;
+  }
+
   path : string = this.router.url
   isLoggedIn : boolean = this.auth.isLoggedIn();
   title = 'BM7-frontend';
 
   logOut(){
-    console.log("yeeeeeees",this.path,this.auth.isLoggedIn());
+    this.auth.sendData(false)
     this.auth.logOut();
-    this.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['login']);
-    });
+    this.router.navigate(['login']);
+  }
+
+  ngOnInit(): void {
+    this.auth.authenticated?.subscribe(v => this.isLoggedIn=v);
   }
 
 }
