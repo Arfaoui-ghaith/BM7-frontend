@@ -35,8 +35,19 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {CalendarModule} from "primeng/calendar";
 import { EditCategoryComponent } from './categories-list/edit-category/edit-category.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TransactionsByCategoryChatComponent } from './charts/transactions-by-category-chat/transactions-by-category-chat.component';
+import {ColorPickerModule} from "primeng/colorpicker";
+import {ChartModule} from "primeng/chart";
+import {TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule} from 'ngx-timeago';
+import { TransactionsByStatusChatComponent } from './charts/transactions-by-status-chat/transactions-by-status-chat.component';
+import { TransactionsByStatusAndCategoriesChartComponent } from './charts/transactions-by-status-and-categories-chart/transactions-by-status-and-categories-chart.component';
+import { AmountByStatusChartComponent } from './charts/amount-by-status-chart/amount-by-status-chart.component';
+import { StatusByDateChartComponent } from './charts/status-by-date-chart/status-by-date-chart.component';
 
 
+export class MyIntl extends TimeagoIntl {
+// do extra stuff here...
+}
 
 @NgModule({
   declarations: [
@@ -50,7 +61,12 @@ import { HttpClientModule } from '@angular/common/http';
     CreateTransactionComponent,
     CreateCategoryComponent,
     EditTransactionComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    TransactionsByCategoryChatComponent,
+    TransactionsByStatusChatComponent,
+    TransactionsByStatusAndCategoriesChartComponent,
+    AmountByStatusChartComponent,
+    StatusByDateChartComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +91,13 @@ import { HttpClientModule } from '@angular/common/http';
     InputNumberModule,
     SelectButtonModule,
     CalendarModule,
-    HttpClientModule
+    HttpClientModule,
+    ColorPickerModule,
+    ChartModule,
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

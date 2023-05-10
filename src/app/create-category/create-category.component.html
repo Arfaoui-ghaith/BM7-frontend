@@ -36,17 +36,24 @@
                 </div>
 
                 <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Color</label>
+                  <div class="col-sm-10">
+                    <p-colorPicker formControlName="colorRGB" format="rgb"></p-colorPicker>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Images</label>
                   <div class="col-sm-10">
                     <p-dropdown [options]="images" formControlName="selectedImage" [(ngModel)]="selectedImage" optionLabel="title" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Image">
                       <ng-template pTemplate="selectedItem">
                         <div class="flex align-items-center gap-2" *ngIf="selectedImage">
-                          <img [src]="selectedImage.image" style="width: 18px"/> {{ selectedImage.name }}
+                          <img [src]="selectedImage.image" style="width: 18px" alt=""/> {{ selectedImage.name }}
                         </div>
                       </ng-template>
                       <ng-template let-image pTemplate="item">
                         <div class="flex align-items-center gap-2">
-                          <img [src]="image.image" style="width: 18px"/> {{ image.name }}
+                          <img [src]="image.image" style="width: 18px" alt=""/> {{ image.name }}
                         </div>
                       </ng-template>
                     </p-dropdown>

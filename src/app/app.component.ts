@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./authService/auth.service";
 import {Router} from "@angular/router";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ import {Router} from "@angular/router";
 export class AppComponent implements OnInit{
   constructor(private auth: AuthService, private router: Router) {
   }
+
+  items?: MenuItem[];
 
   toggle: boolean = false;
 

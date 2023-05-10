@@ -3,6 +3,7 @@ import {User} from "./user";
 import {Category} from "./category";
 import {Transaction} from "./transaction";
 import {BehaviorSubject, Observable} from "rxjs";
+import {Color} from "./color";
 
 @Injectable({
   providedIn: 'root'
@@ -56,9 +57,9 @@ export class DataService {
   ];
 
   categories : Category[] = [
-    new Category("40d2d8db-5831-4332-92bd-a2a510ac5e4f", "Salary", "https://cdn-icons-png.flaticon.com/24/3135/3135706.png", "05/07/2023","df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f"),
-    new Category("f9baae26-3e49-4f80-aea8-a9de2b5bb6c6", "Rent", "https://cdn-icons-png.flaticon.com/24/602/602220.png","05/07/2023", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f"),
-    new Category("25972114-f283-4e55-bac3-46c0d8548e35", "Grocery", "https://cdn-icons-png.flaticon.com/24/2203/2203183.png","05/07/2023", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f")
+    new Category("40d2d8db-5831-4332-92bd-a2a510ac5e4f", "Salary", "https://cdn-icons-png.flaticon.com/24/3135/3135706.png", "05/07/2023","df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f", new Color(4,144,214)),
+    new Category("f9baae26-3e49-4f80-aea8-a9de2b5bb6c6", "Rent", "https://cdn-icons-png.flaticon.com/24/602/602220.png","05/07/2023", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f", new Color(232,74,74)),
+    new Category("25972114-f283-4e55-bac3-46c0d8548e35", "Grocery", "https://cdn-icons-png.flaticon.com/24/2203/2203183.png","05/07/2023", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f", new Color(247,213,62))
   ];
 
   transactions : Transaction[] = [

@@ -35,7 +35,7 @@
                     [loading]="loading"
                     [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                    [globalFilterFields]="['category', 'date', 'amount', 'status']"
                     [tableStyle]="{ 'min-width': '50rem' }"
                   >
                     <ng-template pTemplate="header">
@@ -82,10 +82,10 @@
                     <ng-template pTemplate="body" let-transaction>
                       <tr>
                         <td>
-                          <img [src]="transaction.image" style="width: 20px" /> {{ transaction.category }}
+                          <img [src]="transaction.image" style="width: 20px"  alt=""/> {{ transaction.category }}
                         </td>
                         <td>
-                          {{ transaction.date | date: 'dd/MM/yyyy' }}
+                          {{ transaction.date | date: 'MM/dd/yyyy' }}
                         </td>
                         <td>
                           {{ transaction.amount | currency: 'TND':'symbol' }}
