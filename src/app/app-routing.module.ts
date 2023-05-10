@@ -33,8 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'categories',
-    component: CategoriesListComponent,
-    canActivate: [AuthGuard]
+    component: CategoriesListComponent
   },
   {
     path: 'categories/create',
