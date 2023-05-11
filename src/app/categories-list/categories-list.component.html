@@ -40,15 +40,17 @@
                   >
                     <ng-template pTemplate="header">
                       <tr>
-                        <th style="width: 5.7174887892376685%;">
+                        <th pSortableColumn="title" style="width: 5.7174887892376685%;">
                           <div class="flex align-items-center">
                             Title
+                            <p-sortIcon field="title"></p-sortIcon>
                             <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
                           </div>
                         </th>
-                        <th style="width: 5.282511210762333%;">
+                        <th pSortableColumn="date" style="width: 5.282511210762333%;">
                           <div class="flex align-items-center">
                             Date
+                            <p-sortIcon field="date"></p-sortIcon>
                             <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
                           </div>
                         </th>
@@ -64,7 +66,7 @@
                     <ng-template pTemplate="body" let-category>
                       <tr>
                         <td>
-                          <img [src]="category.image" style="width: 20px" /> {{ category.title }}
+                          <img [src]="category.image" style="width: 20px"  alt=""/> {{ category.title }}
                         </td>
                         <td>
                           {{ category.date | date: 'dd/MM/yyyy' }}

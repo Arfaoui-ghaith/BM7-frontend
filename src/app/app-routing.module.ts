@@ -9,6 +9,8 @@ import { CreateCategoryComponent } from "./create-category/create-category.compo
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import {AuthGuard} from "./authService/auth.guard";
+import {GoalsListComponent} from "./goals/goals-list/goals-list.component";
+import {CreateGoalComponent} from "./create-goal/create-goal.component";
 
 const routes: Routes = [
   {
@@ -38,6 +40,15 @@ const routes: Routes = [
   {
     path: 'categories/create',
     component: CreateCategoryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'goals',
+    component: GoalsListComponent
+  },
+  {
+    path: 'goals/create',
+    component: CreateGoalComponent,
     canActivate: [AuthGuard]
   },
   {

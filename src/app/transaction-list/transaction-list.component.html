@@ -40,27 +40,31 @@
                   >
                     <ng-template pTemplate="header">
                       <tr>
-                        <th style="width: 5.7174887892376685%;">
+                        <th pSortableColumn="category" style="width: 5.7174887892376685%;">
                           <div class="flex align-items-center">
                             Category
+                            <p-sortIcon field="category"></p-sortIcon>
                             <p-columnFilter type="text" field="category" display="menu"></p-columnFilter>
                           </div>
                         </th>
-                        <th style="width: 5.282511210762333%;">
+                        <th pSortableColumn="date" style="width: 5.282511210762333%;">
                           <div class="flex align-items-center">
                             Date
+                            <p-sortIcon field="date"></p-sortIcon>
                             <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
                           </div>
                         </th>
-                        <th style="width: 5.282511210762333%;">
+                        <th pSortableColumn="amount" style="width: 5.282511210762333%;">
                           <div class="flex align-items-center">
                             Amount
+                            <p-sortIcon field="amount"></p-sortIcon>
                             <p-columnFilter type="numeric" field="amount" display="menu" currency="TND"></p-columnFilter>
                           </div>
                         </th>
-                        <th style="width: 5.282511210762333%;">
+                        <th pSortableColumn="status" style="width: 5.282511210762333%;">
                           <div class="flex align-items-center">
                             Status
+                            <p-sortIcon field="status"></p-sortIcon>
                             <p-columnFilter field="status" matchMode="equals" display="menu">
                               <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                 <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)" placeholder="Any">

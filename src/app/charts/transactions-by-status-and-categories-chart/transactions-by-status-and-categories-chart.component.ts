@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Category} from "../../models/category";
+import {Transaction} from "../../models/transaction";
 
 @Component({
   selector: 'app-transactions-by-status-and-categories-chart',
@@ -6,6 +8,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./transactions-by-status-and-categories-chart.component.css']
 })
 export class TransactionsByStatusAndCategoriesChartComponent implements OnInit {
+
+  @Input() categories?: Category[];
+  @Input() transactions?: Transaction[];
   data: any;
 
   options: any;
@@ -16,25 +21,43 @@ export class TransactionsByStatusAndCategoriesChartComponent implements OnInit {
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
 
     this.data = {
-      labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+      labels: this.categories?.map(c=> c.title),
       datasets: [
         {
-          label: 'My First dataset',
-          borderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointBackgroundColor: documentStyle.getPropertyValue('--bluegray-400'),
-          pointBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
+          label: 'Incomes',
+          borderColor: documentStyle.getPropertyValue('--green-400'),
+          pointBackgroundColor: documentStyle.getPropertyValue('--green-400'),
+          pointBorderColor: documentStyle.getPropertyValue('--green-400'),
           pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor: documentStyle.getPropertyValue('--bluegray-400'),
-          data: [65, 59, 90, 81, 56, 55, 40]
+          pointHoverBorderColor: documentStyle.getPropertyValue('--green-400'),
+          data: this.categories?.map(c => {
+            let sum = 0;
+            // @ts-ignore
+            for(let transaction of this.transactions){
+              if(c.id == transaction.category && transaction.status){
+                sum+=transaction.amount;
+              }
+            }
+            return sum
+          })
         },
         {
-          label: 'My Second dataset',
-          borderColor: documentStyle.getPropertyValue('--pink-400'),
-          pointBackgroundColor: documentStyle.getPropertyValue('--pink-400'),
-          pointBorderColor: documentStyle.getPropertyValue('--pink-400'),
+          label: 'Expenses',
+          borderColor: documentStyle.getPropertyValue('--red-400'),
+          pointBackgroundColor: documentStyle.getPropertyValue('--red-400'),
+          pointBorderColor: documentStyle.getPropertyValue('--red-400'),
           pointHoverBackgroundColor: textColor,
-          pointHoverBorderColor: documentStyle.getPropertyValue('--pink-400'),
-          data: [28, 48, 40, 19, 96, 27, 100]
+          pointHoverBorderColor: documentStyle.getPropertyValue('--red-400'),
+          data: this.categories?.map(c => {
+            let sum = 0;
+            // @ts-ignore
+            for(let transaction of this.transactions){
+              if(c.id == transaction.category && !transaction.status){
+                sum+=transaction.amount;
+              }
+            }
+            return sum;
+          })
         }
       ]
     };

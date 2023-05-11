@@ -43,6 +43,8 @@ import { TransactionsByStatusChatComponent } from './charts/transactions-by-stat
 import { TransactionsByStatusAndCategoriesChartComponent } from './charts/transactions-by-status-and-categories-chart/transactions-by-status-and-categories-chart.component';
 import { AmountByStatusChartComponent } from './charts/amount-by-status-chart/amount-by-status-chart.component';
 import { StatusByDateChartComponent } from './charts/status-by-date-chart/status-by-date-chart.component';
+import { GoalsListComponent } from './goals/goals-list/goals-list.component';
+import { CreateGoalComponent } from './create-goal/create-goal.component';
 
 
 export class MyIntl extends TimeagoIntl {
@@ -66,7 +68,9 @@ export class MyIntl extends TimeagoIntl {
     TransactionsByStatusChatComponent,
     TransactionsByStatusAndCategoriesChartComponent,
     AmountByStatusChartComponent,
-    StatusByDateChartComponent
+    StatusByDateChartComponent,
+    GoalsListComponent,
+    CreateGoalComponent
   ],
   imports: [
     BrowserModule,
