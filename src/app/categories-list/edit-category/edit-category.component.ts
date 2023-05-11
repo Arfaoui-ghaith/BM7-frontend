@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {Category} from "../../models/category";
 import {DataService} from "../../models/data.service";
 
 @Component({
@@ -30,7 +29,13 @@ export class EditCategoryComponent implements OnInit{
 
   ngOnInit(): void {
     this.data.updatedSelectedCategory?.subscribe(v => {
-      return this.categoryForm.value.title = v.title;
+      console.log(v);
+      this.categoryForm = new FormGroup({
+        title: new FormControl(v.title),
+        date: new FormControl(v.date),
+        selectedImage: new FormControl(v.image)
+      });
+      console.log(this.categoryForm.value);
     });
   }
 
