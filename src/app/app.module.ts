@@ -45,6 +45,7 @@ import { AmountByStatusChartComponent } from './charts/amount-by-status-chart/am
 import { StatusByDateChartComponent } from './charts/status-by-date-chart/status-by-date-chart.component';
 import { GoalsListComponent } from './goals/goals-list/goals-list.component';
 import { CreateGoalComponent } from './create-goal/create-goal.component';
+import {TreeTableModule} from "primeng/treetable";
 
 
 export class MyIntl extends TimeagoIntl {
@@ -99,9 +100,10 @@ export class MyIntl extends TimeagoIntl {
     ColorPickerModule,
     ChartModule,
     TimeagoModule.forRoot({
-      intl: { provide: TimeagoIntl, useClass: MyIntl },
-      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
-    })
+      intl: {provide: TimeagoIntl, useClass: MyIntl},
+      formatter: {provide: TimeagoFormatter, useClass: TimeagoCustomFormatter},
+    }),
+    TreeTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

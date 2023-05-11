@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {DataService} from "../models/data.service";
-import {Category} from "../models/category";
 import {v4 as uuidv4} from "uuid";
 import {User} from "../models/user";
 import {Router} from "@angular/router";
@@ -64,7 +63,7 @@ export class RegisterComponent implements OnInit{
         <string>this.userForm.value.password
       ));
       this.data.sendUsers(this.users);
-      this.messageService.add({severity: 'success', summary: 'Success', detail: 'New Category Added Successfully !'});
+      this.messageService.add({severity: 'success', summary: 'Success', detail: 'You Registered Successfully !'});
       this.router.navigate(["login"]);
     }
   }
