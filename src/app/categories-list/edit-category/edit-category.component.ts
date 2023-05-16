@@ -3,16 +3,18 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {DataService} from "../../models/data.service";
 import {Category} from "../../models/category";
 import {Router} from "@angular/router";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
-  styleUrls: ['./edit-category.component.css']
+  styleUrls: ['./edit-category.component.css'],
+  providers: [MessageService]
 })
 export class EditCategoryComponent implements OnInit{
 
 
-  constructor(private data: DataService, private router:Router) {
+  constructor(private data: DataService, private router:Router, private messageService: MessageService) {
   }
 
   categories: Category[] = [];
@@ -52,9 +54,9 @@ export class EditCategoryComponent implements OnInit{
         return category;
       }
     });
-    console.log(this.data.categories);
+    this.categories = this.data.categories;
     this.data.sendCategories(this.categories);
-    this.router.navigate(["categories"]);
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'New Category Added Successfully !'});
   }
 
   ngOnInit(): void {
