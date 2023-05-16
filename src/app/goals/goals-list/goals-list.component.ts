@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Goal} from "../../models/goal";
+import {DataService} from "../../models/data.service";
+import {Table} from "primeng/table";
+import {AuthService} from "../../authService/auth.service";
 
 @Component({
   selector: 'app-goals-list',
@@ -7,80 +11,55 @@ import {Component, OnInit} from '@angular/core';
 })
 export class GoalsListComponent implements OnInit{
 
-  files: [{
-    data: {
-      current: number;
-      goal: number;
-      start: string;
-      progress: number;
-      end: string;
-      title: string;
-      status: boolean
-    };
-    children: { transaction: { date: string; amount: number; name: string; id: number } }[]
-  }] = [
-    {
-      data: {
-        title: 'Item ',
-        start: '',
-        end: 'Type ',
-        current: 5454,
-        goal: 65445,
-        progress: 5454,
-        status: false
-      },
-      children: [
-        {
-          transaction: {
-            id: 1,
-            name: 'Item ',
-            amount: 15,
-            date: 'Type'
-          }
-        }
-      ]
-    }
-  ];
+  constructor(private data: DataService, private auth: AuthService) {
+  }
 
-  cols: any[] = [
-    { field: 'name', header: 'Title' },
-    { field: 'start', header: 'Start' },
-    { field: 'end', header: 'End' },
-    { field: 'current', header: 'Current' },
-    { field: 'goal', header: 'Goal' },
-    { field: 'progress', header: 'Progress' },
-    { field: 'status', header: 'Status' }
-  ];
+  protected readonly Date = Date;
+
+  value: any;
+
+  loading: boolean = true;
+
+  clear(table: Table) {
+    table.clear();
+  }
+
+  visible?: boolean;
+
+
+  goals: Goal[] = [];
+
+  gls: {
+    current_amount: number;
+    target_amount: number | undefined;
+    id: string | undefined;
+    title: string | undefined;
+    deadline: string | undefined;
+    start_date: string | undefined;
+  }[] = [];
+
+  balance: number=0;
+  previous_goal: number | undefined=0;
+
 
   ngOnInit() {
+    this.data.updatedGoals?.subscribe(g => this.goals = g);
     // @ts-ignore
-    this.files = [];
-    for (let i = 0; i < 50; i++) {
-      let node = {
-        data: {
-          name: 'Item ' + i,
-          size: Math.floor(Math.random() * 1000) + 1 + 'kb',
-          type: 'Type ' + i
-        },
-        children: [
-          {
-            data: {
-              name: 'Item ' + i + ' - 0',
-              size: Math.floor(Math.random() * 1000) + 1 + 'kb',
-              type: 'Type ' + i
-            }
-          }
-        ]
-      };
-
+    this.balance = this.data.getBalance(this.auth.getLoggedUser())
+    this.gls = this.goals.map(g => {
       // @ts-ignore
-      this.files.push(node);
-    }
-
-    this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'size', header: 'Size' },
-      { field: 'type', header: 'Type' }
-    ];
+      this.balance = this.balance-this.previous_goal;
+      this.previous_goal = g.target_amount;
+      return {
+        id: g.id,
+        title: g.title,
+        start_date: g.createdAt,
+        deadline: g.deadline,
+        target_amount: g.target_amount,
+        current_amount: this.balance
+      }
+    })
+    console.log(this.goals);
+    this.loading = false;
   }
 }

@@ -4,6 +4,7 @@ import {Category} from "./category";
 import {Transaction} from "./transaction";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Color} from "./color";
+import {Goal} from "./goal";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,9 @@ export class DataService {
   private usersDataSource?: BehaviorSubject<User[]> ;
   public updatedUsers?: Observable<User[]> ;
 
+  private goalsDataSource?: BehaviorSubject<Goal[]> ;
+  public updatedGoals?: Observable<Goal[]> ;
+
   constructor() {
     this.transactionsDataSource = new BehaviorSubject<Transaction[]>(this.transactions);
     this.updatedTransactions = this.transactionsDataSource.asObservable();
@@ -30,6 +34,12 @@ export class DataService {
     this.updatedSelectedCategory = this.selectedCategoryDataSource.asObservable();
     this.usersDataSource = new BehaviorSubject<User[]>(this.users);
     this.updatedUsers = this.usersDataSource.asObservable();
+    this.goalsDataSource = new BehaviorSubject<Goal[]>(this.goals);
+    this.updatedGoals = this.goalsDataSource.asObservable();
+  }
+
+  sendGoals(data: Goal[]) {
+    this.goalsDataSource?.next(data);
   }
 
   sendTransactions(data: Transaction[]) {
@@ -72,6 +82,12 @@ export class DataService {
     new Transaction("d2a45944-60b6-4c86-888e-58d73d3b9e1a", 1900, true, "05/10/2023","d93811ae-5722-4d3d-aebc-25a6bf6f3896", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f")
   ];
 
+  goals : Goal[] = [
+    new Goal("96f3c188-536b-46f7-82e6-9f9554197a55", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f", "clothes", 3000, "05/25/2023", "05/16/2023"),
+    new Goal("3d75d01e-8aa5-4e63-a1d6-78ca4c4406ec", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f", "smartwatch", 1200, "05/29/2023","05/16/2023"),
+    new Goal("58622758-4f92-48f9-acba-a481b6202c76", "df389fe4-05d3-4d0e-a3f4-a5b9e4088a6f", "smartphone", 2600, "06/02/2023","05/16/2023"),
+    ]
+
   checkUserByEmail(email: string){
     return this.users.some(u => u.email == email);
   }
@@ -108,6 +124,21 @@ export class DataService {
       user.password = password;
       this.users[i] = user;
     }
+  }
+
+  getBalance(userId: string){
+    let incomes=0;
+    let expenses : number=0;
+
+    for(let transaction of this.getTransactionsByUser(userId)){
+      if(transaction.status){
+        incomes+=transaction.amount;
+      }else{
+        expenses+=transaction.amount;
+      }
+    }
+
+    return incomes-expenses;
   }
 
   addTransaction(transaction: Transaction){

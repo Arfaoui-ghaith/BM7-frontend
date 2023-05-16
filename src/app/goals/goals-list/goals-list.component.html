@@ -4,7 +4,7 @@
     <div class="pagetitle">
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Saving Goals</li>
+          <li class="breadcrumb-item">Goals</li>
           <li class="breadcrumb-item active">List</li>
         </ol>
       </nav>
@@ -25,30 +25,105 @@
               </div>
                 <div class="datatable-container">
 
-                  <p-treeTable [value]="files" [columns]="cols" [paginator]="true" [rows]="10" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
-                    <ng-template pTemplate="header" let-columns>
+                  <p-table
+                    #dt1
+                    [value]="gls"
+                    dataKey="id"
+                    [rows]="10"
+                    [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[5, 10, 25]"
+                    [loading]="loading"
+                    [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [globalFilterFields]="['title', 'start_date', 'deadline', 'target_amount', 'current_amount']"
+                    [tableStyle]="{ 'min-width': '60rem' }"
+                  >
+                    <ng-template pTemplate="header">
                       <tr>
-                        <th *ngFor="let col of columns">
-                          {{ col.header }}
+                        <th pSortableColumn="title" style="width: 5.7174887892376685%;">
+                          <div class="flex align-items-center">
+                            Title
+                            <p-sortIcon field="title"></p-sortIcon>
+                            <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+                          </div>
+                        </th>
+                        <th pSortableColumn="start_date" style="width: 6.282511210762333%;">
+                          <div class="flex align-items-center">
+                            Start
+                            <p-sortIcon field="start_date"></p-sortIcon>
+                            <p-columnFilter type="text" field="start_date" display="menu"></p-columnFilter>
+                          </div>
+                        </th>
+                        <th pSortableColumn="deadline" style="width: 6.282511210762333%;">
+                          <div class="flex align-items-center">
+                            DeadLine
+                            <p-sortIcon field="deadline"></p-sortIcon>
+                            <p-columnFilter type="text" field="deadline" display="menu"></p-columnFilter>
+                          </div>
+                        </th>
+                        <th pSortableColumn="target_amount" style="width: 6.282511210762333%;">
+                          <div class="flex align-items-center">
+                            Target
+                            <p-sortIcon field="target_amount"></p-sortIcon>
+                            <p-columnFilter type="numeric" field="target_amount" display="menu"></p-columnFilter>
+                          </div>
+                        </th>
+                        <th pSortableColumn="current_amount" style="width: 6.282511210762333%;">
+                          <div class="flex align-items-center">
+                            Current
+                            <p-sortIcon field="current_amount"></p-sortIcon>
+                            <p-columnFilter type="numeric" field="current_amount" display="menu"></p-columnFilter>
+                          </div>
+                        </th>
+
+                        <th style="width: 5.282511210762333%;">
+                          <div class="flex align-items-center">
+                            Actions
+                          </div>
                         </th>
                       </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                    <ng-template pTemplate="body" let-gaol>
                       <tr>
-                        <td *ngFor="let col of columns; let i = index">
-                          <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
-                          {{ rowData[col.field] }}
+                        <td>
+                          {{ gaol.title }}
+                        </td>
+                        <td>
+                          {{ gaol.start_date | date: 'dd/MM/yyyy' }}
+                        </td>
+                        <td>
+                          {{ gaol.deadline | date: 'dd/MM/yyyy' }}
+                        </td>
+                        <td>
+                          {{ gaol.target_amount }} TND
+                        </td>
+                        <td>
+                          <span [class]="gaol.current_amount>=gaol.target_amount ? 'text-success' : 'text-danger'">{{ gaol.current_amount }} TND</span>
+                        </td>
+                        <td>
+                          <p-button  icon="bi bi-trash" styleClass="p-button-danger" [style]="{ 'margin-right': '.5em' }"></p-button>
+
+                          <p-button icon="bi bi-pencil" styleClass="p-button-warning"></p-button>
+
                         </td>
                       </tr>
                     </ng-template>
-                  </p-treeTable>
-
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="7">No goals found.</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
                 </div>
               </div>
               <!-- End Table with stripped rows -->
 
             </div>
           </div>
+
+          <p-dialog header="Edit Category" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+            <app-edit-category></app-edit-category>
+          </p-dialog>
 
         </div>
       </div>
